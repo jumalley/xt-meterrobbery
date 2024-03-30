@@ -9,6 +9,12 @@ function createMeterTargets()
             distance = 2.0,
             items = clConfig.AcceptedItems,
             anyItem = true,
+            canInteract = function(entity, distance, coords, name, bone)
+            local Cooldown = lib.callback.await('xt-meterrobbery:server:getMeterCooldown', false, entity)
+                if not Cooldown then
+                return true
+                end
+            end,
             onSelect = function(data)
                 robParkingMeter(data)
             end,
